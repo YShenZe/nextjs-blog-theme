@@ -1,0 +1,105 @@
+---
+type: Post
+title: spend some time with me getting started with Nodejs
+description: >-
+   The author switched from PHP to Node.js in the second half of this year (around August-September) because Node.js holds significant importance for both frontend and full-stack development, especially in JavaScript-based full-stack scenarios.
+date: '2025-03-01'
+---
+The author switched from PHP to Node.js in the second half of this year (around August-September) because Node.js holds significant importance for both frontend and full-stack development, especially in JavaScript-based full-stack scenarios. However, due to fragmented learning without systematic study or a clear roadmap, the author often struggles with scattered code references, bottlenecks, and poor code optimization. This article serves as a reorganized learning summary of Node.js concepts. Experts are welcome to provide feedback in the comments section for any inaccuracies.  
+Basic JavaScript knowledge is required before learning Node.js.
+
+## What is Node.js?
+
+The official description states:
+
+> Node.js® is a free, open-source, cross-platform JavaScript runtime environment that enables developers to build servers, web applications, command-line tools, and scripts.
+
+Technically, Node.js is neither a new programming language nor a JavaScript framework, but a JavaScript runtime environment. Analogous to GNU compilers for C/C++, it provides execution support for JavaScript.
+
+To illustrate: Imagine receiving a .docx file. Opening it in Notepad displays garbled text because Notepad lacks the runtime environment to interpret .docx formats. Microsoft Office or WPS Office acts as the runtime environment here. Similarly, browsers historically served as JavaScript's runtime environment, while Node.js now extends this capability beyond browsers.
+
+For deeper understanding, consider creating a simple programming language with custom syntax. Write a JavaScript program using Node.js file APIs to read and interpret your custom language files. This exercise reveals how Node.js (via its C/C++ core) interprets JavaScript, mirroring how browsers execute scripts through engines like V8.
+
+## Understanding the Runtime Environment
+
+Browsers provide JavaScript runtime environments with APIs like DOM manipulation and timers. Chrome uses the V8 engine within the Chromium runtime to inject these APIs. Similarly, Node.js employs the V8 engine to parse/execute JavaScript while injecting its own APIs for server-side functionalities (file I/O, networking, etc.).
+
+Note: The V8 engine parses and executes APIs provided by Chromium/Node.js.  
+In essence, a JavaScript runtime environment supplies APIs for interacting with external systems. Node.js leverages V8 to execute JavaScript while exposing server-side capabilities through its APIs.
+
+## Installing Node.js
+
+Visit  for installation.  
+On Ubuntu:  
+```shell
+apt install nodejs npm
+```
+## NPM Package Manager
+
+npm (Node Package Manager) is the standard package manager for Node.js, hosting over 2.1 million packages (as of 2022). It handles dependency management for both Node.js and frontend JavaScript projects.
+
+Install project dependencies (with `package.json`):  
+```shell
+npm install
+```
+Install a single package:  
+```shell
+npm install <package-name>
+```
+Flags:  
+- `--save-dev`: Adds to `devDependencies`  
+- `--no-save`: Skips adding to dependencies  
+- `--save-optional`: Adds to `optionalDependencies`  
+- `--no-optional`: Prevents optional dependency installation  
+
+ What Can Node.js Do?
+
+1. High-performance Web Servers  
+Node.js enables building web servers in <10 lines of code. While frontend developers still need server fundamentals, the learning curve is lower compared to configuring Apache/Nginx. JavaScript can directly interact with databases (though not recommended for large apps), allowing frontend engineers to handle full-stack development without switching languages.
+
+2. I/O vs. Compute-Intensive Tasks  
+Node.js excels at I/O-bound tasks (network/disk operations) using asynchronous non-blocking I/O. For compute-heavy tasks (encryption, matrix calculations), it can invoke C/C++ modules via native interfaces. Node.js founder Ryan Dahl acknowledges Go's superiority for large-scale backend systems, but language choice depends on specific use cases.
+
+## The Controversial "Full-Stack" JavaScript Engineer
+
+MEAN stack (MongoDB, Express, Angular.js, Node.js) once empowered frontend developers to claim "full-stack" status. However, enterprise backend development remains Java-dominated due to its strong typing, OOP rigor, and mature tooling. Java engineers often produce more maintainable code, while Node.js developers using Express/Koa face middleware gaps (logging, security, ORM, etc.). True full-stack mastery requires humility and dedication to backend engineering principles beyond basic CRUD operations.
+
+## Code Examples
+
+### HTTP Server
+```JavaScript
+import { createServer } from 'node:http';
+
+const server = createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Hello World!\n');
+});
+
+server.listen(3000, '127.0.0.1', () => {
+  console.log('Listening on 127.0.0.1:3000');
+});
+```
+### Test Case
+```JavaScript
+import assert from 'node:assert';
+import test from 'node:test';
+
+test('that 1 is equal 1', () => {
+  assert.strictEqual(1, 1);
+});
+
+test('that throws as 1 is not equal 2', () => {
+  assert.strictEqual(1, 2);
+});
+```
+### Summary
+
+From :  
+- Node.js is server-side JavaScript.  
+- A platform built on Chrome's JavaScript runtime.  
+- An event-driven I/O environment using the V8 engine.  
+
+Additional perspectives:  
+1. Distinguishes server-side vs. browser JavaScript.  
+2. Node.js is an application enabling JavaScript execution on servers.  
+3. Aligns with the official definition: V8-powered, event-driven I/O.
